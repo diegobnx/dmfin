@@ -2,41 +2,39 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+type createDataProp = {
+  description: string;
+  date_in: Date;
+  value: number;
+  id_user: number;
+};
+
 type findDataProp = {
   description: string;
 };
 
-type createDataProp = {
-  description: string;
-  date_exp: string;
-  value: number;
-  status_pag: boolean;
-  id_user: number;
-};
-
-export const DebtService = {
+export const EntryService = {
   findAllByDesc: async (data: findDataProp) => {
-    return await prisma.debt.findMany({
+    return await prisma.entry.findMany({
       where: {
         description: {
           contains: data.description,
         },
       },
-      orderBy: { date_exp: "desc" },
+      orderBy: { date_in: "desc" },
     });
   },
 
   findAll: async () => {
-    return await prisma.debt.findMany({});
+    return await prisma.entry.findMany({});
   },
 
   create: async (data: createDataProp) => {
-    return await prisma.debt.create({
+    return await prisma.entry.create({
       data: {
         description: data.description,
-        date_exp: new Date(data.date_exp),
+        date_in: new Date(data.date_in),
         value: data.value,
-        status_pag: data.status_pag,
         id_user: data.id_user,
       },
     });

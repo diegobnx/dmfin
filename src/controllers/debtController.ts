@@ -16,10 +16,10 @@ export const findAllByDesc = async (req: Request, res: Response) => {
     if (debts.length !== 0) {
       res.json({ debts });
     } else {
-      res.json({error: 'Não foram encontrados débitos para esta pesquisa!'})
+      res.json({ error: 'Não foram encontrados débitos para esta pesquisa!' });
     }
   } else {
-    res.json({ error: "Descrição não encontrada!" });
+    res.json({ error: "Descrição não pode ser vazia!" });
   }
 };
 
@@ -33,7 +33,7 @@ export const addDebts = async (req: Request, res: Response) => {
     if (user) {
       const debt = await DebtService.create({
         description,
-        date_exp: date_exp,
+        date_exp,
         value: parseFloat(value),
         status_pag: Boolean(status_pag),
         id_user: user.id,
