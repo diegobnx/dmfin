@@ -14,6 +14,7 @@ model User {
   name        String
   debts       Debt[]
   entrys      Entry[]
+  products    Product[]
 
   @@map("users")
 }
@@ -45,10 +46,13 @@ model Entry {
 
 model Product {
   id          Int     @id @default(autoincrement())
-  description String  @unique
-  price       Float   @unique
-  category    String  @unique
-  quantity    Int     @unique
+  description String  
+  price       Float   
+  category    String  
+  quantity    Int     
+  id_user     Int
+
+  user        User    @relation(fields: [id_user], references: [id])
 
   @@map("products")
 }

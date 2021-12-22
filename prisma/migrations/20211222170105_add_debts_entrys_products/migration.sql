@@ -28,6 +28,7 @@ CREATE TABLE "products" (
     "price" DOUBLE PRECISION NOT NULL,
     "category" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
+    "id_user" INTEGER NOT NULL,
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
@@ -49,3 +50,6 @@ ALTER TABLE "debts" ADD CONSTRAINT "debts_id_user_fkey" FOREIGN KEY ("id_user") 
 
 -- AddForeignKey
 ALTER TABLE "entrys" ADD CONSTRAINT "entrys_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "products" ADD CONSTRAINT "products_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
